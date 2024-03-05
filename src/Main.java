@@ -7,57 +7,84 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         String[][] maze = getMaze("src/maze");
-        mazePrint(maze);
         Maze puzzle = new Maze(maze);
+
+        System.out.println("Ends" + Arrays.toString(puzzle.getEnd()));
+        System.out.println(Arrays.toString(puzzle.getStart()));
         ArrayList<int[]> coords = mazeCoords(maze,puzzle);
 
-        for(int[] coord: coords ){
-            System.out.println(Arrays.toString(coord));
-        }
-        System.out.println(Arrays.toString(puzzle.getStart()));
-
-        System.out.println(Arrays.toString(puzzle.getEnd()));
     }
 
         public static ArrayList<int[]> mazeCoords(String[][]maze, Maze puzzle){
         ArrayList<int[]> coords = new ArrayList<int[]>();
         coords.add(puzzle.getStart());
-        int[] current = puzzle.getStart();
-        while (!Arrays.equals(current, puzzle.getEnd())){
 
-            while((current[0] > maze.length)&&(current[1] > maze[0].length)){
-            if(maze[current[0]+1][current[1]].equals(".")){
+        int[] current = puzzle.getStart();
+
+        while (!((Maze.CoordsCheck(current[0],puzzle.getEnd()[0]))&&(Maze.CoordsCheck(current[1],puzzle.getEnd()[1])))){
+
+
+                if((current[0] + 1 < maze.length ) && (maze[current[0]+1][current[1]].equals("."))){
                 maze[current[0]][current[1]] = "+";
                 current[0] = current[0]+1;
+
+                for(String[] row: maze){
+                    for (String colum : row){
+                        System.out.print(colum);
+                    }
+                    System.out.println();
+                }
+
+                    System.out.println();
                 coords.add(current);
 //                right
-            }
-            if(maze[current[0]-1][current[1]].equals(".")){
+             }
+
+                if((current[0]-1 > 0) && (maze[current[0]-1][current[1]].equals("."))){
                 maze[current[0]][current[1]] = "+";
                 current[0] = current[0]-1;
+                    for(String[] row: maze){
+                        for (String colum : row){
+                            System.out.print(colum);
+                        }
+                        System.out.println();
+                    }
+                    System.out.println();
                 coords.add(current);
 //               left
             }
-            if(maze[current[0]][current[1]+1].equals(".")){
+                if((current[1] + 1 < maze[0].length) && maze[current[0]][current[1]+1].equals(".")){
                 maze[current[0]][current[1]] = "+";
                 current[1] = current[1]+1;
-                coords.add(current);
-//                up
-            }
-
-            if(maze[current[0]][current[1]-1].equals(".")){
-                maze[current[0]][current[1]] = "+";
-                current[1] = current[1]-1;
+                    for(String[] row: maze){
+                        for (String colum : row){
+                            System.out.print(colum);
+                        }
+                        System.out.println();
+                    }
+                    System.out.println();
                 coords.add(current);
 //                down
             }
-        }
+                if((current[1] > 0) && maze[current[0]][current[1]-1].equals(".")){
+                maze[current[0]][current[1]] = "+";
+
+                current[1] = current[1]-1;
+                    for(String[] row: maze){
+                        for (String colum : row){
+                            System.out.print(colum);
+                        }
+                        System.out.println();
+                    }
+                    System.out.println();
+                coords.add(current);
+//                up
+                }
         }
         return coords;
         }
-
-
 
 
         public static void mazePrint(String[][] maze){
