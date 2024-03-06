@@ -1,9 +1,13 @@
 public class Maze {
     private final String start = "0,0";
     private String end;
+    private String[][] maze;
+    private int[] current;
+
 
     public Maze(String[][]maze ){
         end = maze.length-1 +","+ (maze[0].length-1) ;
+        this.maze = maze;
     }
 
     public int[] getStart() {
@@ -21,6 +25,30 @@ public class Maze {
         log[1] =Integer.parseInt(ends[1]);
         return log;
     }
+
+
+    public boolean goLeft(int[][]current, int[][]towards) {
+        return false;
+    }
+    public boolean goRight(int[][]current, int[][]towards) {
+        return false;
+    }
+    public boolean goUp(int[][]current, int[][]towards) {
+        return false;
+    }
+    public boolean goDown(int[][]current, int[][]towards) {
+        return false;
+    }
+    public int multipleWay(int[][]current, int choices){
+        int i = 0;
+
+        return i;
+    }
+    public void deadEnd(int[][]current){
+
+    }
+
+
 
     public static boolean CoordsCheck(int a, int b){
         return a == b;
